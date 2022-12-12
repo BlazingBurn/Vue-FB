@@ -4,8 +4,7 @@ import { UserApi } from "../services/user"
 export const useUserStore = defineStore("userStore" , {
     state : () => {
         return {
-            user : {},
-            livraison : {}
+            user : {}
         }
     },
     actions : {
@@ -25,17 +24,47 @@ export const useUserStore = defineStore("userStore" , {
 
             // remplir notre state 
             this.user = {
+                pseudo : user.pseudo,
                 email : user.email ,
-                role : user.role , 
                 isLogged : true 
             } ; 
 
             return {message : "ok" } ;
         },
-        login : function(identifiants){},
-        logout : function(){},
-        addAdresseLivraison : function(adresse){
-            this.livraison = adresse 
+        login : async function(identifiants){
+
+            const userApi = new UserApi();
+            
+            let verif;
+            // vérifier le mail et mdp
+            if (await userApi.emailConnect(identifiants.email)) {
+                if( await userApi.passwordConnect(identifiants.email, identifiants.password)) {
+                    verif = true;
+                } else {
+                    verif = false;
+                }
+            } else {
+                verif = false;
+            }
+            
+            console.log(verif, identifiants);
+
+            if(!verif) return {message : "l'email ou le mot de passe est incorrect"};
+
+            const user = await userApi.getOneByEmail(identifiants.email);
+
+            this.user = {
+                pseudo : user.pseudo,
+                email : user.email,
+                isLogged : true 
+            }; 
+
+            return {message : "ok" };
+        },
+        logout : async function(){
+            this.user = {}
+
+            return {message : "ok"};
         }
     }
 

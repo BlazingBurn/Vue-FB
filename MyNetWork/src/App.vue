@@ -26,6 +26,7 @@ import {RouterView} from "vue-router"
 
 .pageCustom {
   width: 85%;
+  margin-top: 45px;
 }
 
 </style>

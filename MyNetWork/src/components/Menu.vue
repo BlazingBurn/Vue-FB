@@ -10,24 +10,58 @@
                         <img class="homeIMG" src="../assets/home-30.png" alt=""/> Fils d'actualités
                     </RouterLink>
                 </li>
-                <li class="nav-item border">
-                    <RouterLink :to="{name:'profil'}" class="nav-link text-dark">
-                        <img class="userIMG" src="../assets/user-50.png" alt=""/> Créer un profil
+
+                <div v-if="!isConnected">
+                    <li class="nav-item border">
+                        <RouterLink :to="{name:'createAccount'}" class="nav-link text-dark">
+                            <img class="userIMG" src="../assets/user-50.png" alt=""/> Créer un profil
+                        </RouterLink>
+                    </li>
+                    <li class="nav-item border">
+                        <RouterLink :to="{name:'connect'}" class="nav-link text-dark">
+                            <img class="connectIMG" src="../assets/connect-64.png" alt=""/> Se connecter
+                        </RouterLink>
+                    </li>
+                </div>
+                <div v-else>
+                    <RouterLink :to="{name:'disconnect'}" class="nav-link text-dark">
+                            <img class="disconnectIMG" src="../assets/disconnect-50.png" alt=""/> Déconnexion
                     </RouterLink>
-                </li>
-                <li class="nav-item border">
-                    <RouterLink :to="{name:'profil'}" class="nav-link text-dark">
-                        <img class="connectIMG" src="../assets/connect-64.png" alt=""/> Se connecter
-                    </RouterLink>
-                </li>
+                </div>
+
             </ul>
         </nav>
     </div>
 </template>
 
+<script>
+    export default {
+        onMounted() {
+            show = false;
+        }
+    }
+</script>
+
 <script setup>
     import { RouterLink } from "vue-router"
     import {computed} from "vue"
+
+    import {useUserStore} from "../stores/userStore"
+    import { onMounted , ref } from "vue"
+
+    const userStore = useUserStore();
+    const isConnected = computed(() => {
+        return userStore.user.isLogged ? true : false
+    })
+
+    // let show = ref(true)
+    // const userStore = useUserStore();
+    // onMounted( () => {
+    //     if(userStore.user && userStore.user.isLogged){
+    //         show.value = false
+    //     }
+    // })
+
 </script>
 
 <style scoped>
@@ -46,10 +80,6 @@
     height: 20px;
 }
 
-.connectIMG {
-    width: 20px;
-    height: 20px;
-}
 .disconnectIMG {
     width: 20px;
     height: 20px;

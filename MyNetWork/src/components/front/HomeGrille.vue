@@ -1,5 +1,5 @@
 <template>
-    <div class="HomeGrilleCustom">
+    <div>
         <article v-for="article , index in articles" :key="index" class="articleCustom d-flex flex-column">
             
             <div class="d-flex justify-content-between bg-light">
@@ -76,10 +76,6 @@
 </script>
 
 <style scoped>
-
-.HomeGrilleCustom {
-    margin-top: 51px;
-}
 
 .articleCustom {
     border: 3px solid rgb(169, 169, 169);
