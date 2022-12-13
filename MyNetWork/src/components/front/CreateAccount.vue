@@ -37,6 +37,9 @@
             <div class="alert alert-danger" v-if="show">
                 <div v-for="message, index in messages" :key="index">{{ message }}</div>
             </div>
+            <div class="alert alert-danger" v-if="show2">
+                <div>{{ messages2 }}</div>
+            </div>
         </form>
 
     </div>
@@ -56,7 +59,9 @@
     const urlImg = ref("")
     
     let show = ref(false)
+    let show2 = ref(false)
     let messages = ref({})
+    let messages2 = ref({})
     let router = useRouter()
 
     async function submit (){
@@ -64,10 +69,12 @@
         // 8 if // 8 vérifications 
         const validationIdentifiant = Joi.object({
             email : Joi.string().email({ tlds: { allow: false } }).required(),
-            password : Joi.string().trim().min(5).max(255).required(),
+            pseudo : Joi.string().trim().min(3).required(),
+            password : Joi.string().trim().min(6).required(),
             confirmerPassword : Joi.any().equal(Joi.ref('password')).required()
                                         .label('Confirm password')
-                                        .messages({ 'any.only': '{{#label}} does not match' })
+                                        .messages({ 'any.only': '{{#label}} does not match' }),
+            urlImgProfil : Joi.string().trim().min(1).required()
         })
 
         const identifiants = {
@@ -75,11 +82,12 @@
             email : email.value,
             password : password.value,
             confirmerPassword : confirmerPassword.value,
-            urlImg : urlImg.value
+            urlImgProfil : urlImg.value
         }
         
         const { error } = validationIdentifiant.validate(identifiants , {abortEarly : false})
         if(error) {
+            show2.value = false;
             show.value = true ;
             const details = []
             for(let er of error.details){
@@ -94,12 +102,16 @@
             pseudo : pseudo.value,
             email : email.value,
             password : password.value,
-            urlImg : urlImg.value
+            urlImgProfil : urlImg.value
         }
         // créer un compte
         const reponse = await userStore.add(identifiant)
         if(reponse.message && reponse.message === "ok"){
             router.push("/")
+        } else {
+            show2.value = true;
+            messages2.value = reponse.message;
+            return ;
         }
         console.log(reponse);
 

@@ -45,22 +45,12 @@
 <script setup>
     import { RouterLink } from "vue-router"
     import {computed} from "vue"
-
     import {useUserStore} from "../stores/userStore"
-    import { onMounted , ref } from "vue"
 
     const userStore = useUserStore();
     const isConnected = computed(() => {
-        return userStore.user.isLogged ? true : false
-    })
-
-    // let show = ref(true)
-    // const userStore = useUserStore();
-    // onMounted( () => {
-    //     if(userStore.user && userStore.user.isLogged){
-    //         show.value = false
-    //     }
-    // })
+        return userStore.user.isLogged ? true : false;
+    });
 
 </script>
 
@@ -71,18 +61,23 @@
     height: 30px;
 }
 .homeIMG {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 
 .userIMG {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
+}
+
+.connectIMG {
+    width: 25px;
+    height: 25px;
 }
 
 .disconnectIMG {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 
 .routerSizeCustom {

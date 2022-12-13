@@ -13,10 +13,13 @@ export const useUserStore = defineStore("userStore" , {
             
             // vérifier si il y a pas déjà un user qui a déjà utilisé cet email 
             const verif = await userApi.existe(identifiant.email)
-            
             console.log(verif , identifiant.email);
-
             if(!verif) return {message : "l'email est déjà utilisé"}
+            
+            // vérifier si il y a pas déjà un user qui a déjà utilisé ce pseudo
+            const verifPseudo = await userApi.existePseudo(identifiant.pseudo)
+            console.log(verifPseudo , identifiant.pseudo);
+            if(!verifPseudo) return {message : "le pseudo est déjà utilisé"}
 
             // ajouter dans la base de donnée 
             // requete ajax pour ajouter un profil user dans la base de données

@@ -32,6 +32,19 @@ export class UserApi{
         }
     }
 
+    async existePseudo(pseudo){
+        try{
+            const reponse = await fetch(`http://localhost:3400/utilisateurs?pseudo=${pseudo}`)
+
+            const data = await reponse.json();
+            // si existe [{}]
+            // si pseudo non pris existe []
+            return data.length === 0 ? true : false ;
+        }catch(ex){
+            console.log(ex)
+        }
+    }
+
     async emailConnect(email){
         try{
             const reponse = await fetch(`http://localhost:3400/utilisateurs?email=${email}`);

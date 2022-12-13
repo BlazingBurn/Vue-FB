@@ -26,6 +26,9 @@
             <div class="alert alert-danger" v-if="show">
                 <div v-for="message, index in messages" :key="index">{{ message }}</div>
             </div>
+            <div class="alert alert-danger" v-if="show2">
+                <div>{{ messages2 }}</div>
+            </div>
         </form>
 
     </div>
@@ -41,7 +44,9 @@
     const password = ref("")
     
     let show = ref(false)
+    let show2 = ref(false)
     let messages = ref({})
+    let messages2 = ref({})
     let router = useRouter()
 
     async function submit (){
@@ -59,7 +64,8 @@
         
         const { error } = validationIdentifiant.validate(identifiants , {abortEarly : false})
         if(error) {
-            show.value = true ;
+            show2.value = false;
+            show.value = true;
             const details = []
             for(let er of error.details){
                 details.push(er.message)
@@ -73,6 +79,10 @@
         const reponse = await userStore.login(identifiants)
         if(reponse.message && reponse.message === "ok"){
             router.push("/")
+        } else {
+            show2.value = true;
+            messages2.value = reponse.message;
+            return ;
         }
         console.log(reponse);
 

@@ -1,0 +1,86 @@
+{
+  "utilisateurs": [
+    {
+      "id": 1,
+      "pseudo": "Alain",
+      "email": "alain@yahoo.fr",
+      "password": "123456",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image"
+    },
+    {
+      "id": 2,
+      "pseudo": "Béatrice",
+      "email": "bea@yahoo.fr",
+      "password": "123456",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image"
+    },
+    {
+      "pseudo": "test",
+      "email": "test@test.fr",
+      "password": "123456",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image",
+      "id": 3
+    },
+    {
+      "pseudo": "admin",
+      "email": "admin@yahoo.fr",
+      "password": "123456",
+      "urlImgProfil": "https://thispersondoesnotexist.com/image",
+      "id": 4
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "contenu": "lorem ipsum",
+      "urlImgArticle": "https://source.unsplash.com/random/500x300",
+      "like": 11,
+      "pseudo": "Alain",
+      "date": 1649277945051,
+      "commentaires": [
+        {
+          "id": 1,
+          "contenu": "lorem ipsum",
+          "pseudo": "Béatrice",
+          "dt": 1649277945051
+        },
+        {
+          "id": 2,
+          "contenu": "lorem ipsum",
+          "pseudo": "Béatrice",
+          "dt": 1649277945051
+        },
+        {
+          "id": 3,
+          "contenu": "lorem ipsum",
+          "pseudo": "test",
+          "dt": "2022-12-12T23:12:29.067Z"
+        },
+        {
+          "id": 4,
+          "contenu": "lorem ipsum",
+          "pseudo": "test",
+          "dt": "2022-12-12T23:13:31.675Z"
+        }
+      ]
+    },
+    {
+      "contenu": "test",
+      "urlImgArticle": "https://source.unsplash.com/random/500x300",
+      "like": 0,
+      "pseudo": "test",
+      "date": "2022-12-12T22:36:30.100Z",
+      "commentaires": [],
+      "id": 2
+    },
+    {
+      "id": 3,
+      "contenu": "test",
+      "urlImgArticle": "https://source.unsplash.com/random/500x300",
+      "like": 6,
+      "pseudo": "Alain",
+      "date": "2022-12-13T00:02:37.417Z",
+      "commentaires": []
+    }
+  ]
+}
